@@ -6,7 +6,8 @@ from langchain_pinecone import PineconeVectorStore
 
 if __name__ == '__main__':
     print("Ingesting...")
-    loader = TextLoader('D:/projects/langchain/test/bolg/medium.txt')
+    # medium.txt is a text file that contains blog content
+    loader = TextLoader('./bolg/medium.txt')
     document = loader.load()
 
     print("splitting...")
@@ -17,5 +18,5 @@ if __name__ == '__main__':
     embeddings = OllamaEmbeddings(model="llama3.2")
 
     print("Ingesting ...")
-    PineconeVectorStore.from_documents(texts, embeddings, index_name="medium-blogs-embeddings-index")
+    PineconeVectorStore.from_documents(texts, embeddings, index_name=os.environ["INDEX_NAME"])
     print("Finish")
